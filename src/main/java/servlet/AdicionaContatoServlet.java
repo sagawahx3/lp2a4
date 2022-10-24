@@ -14,9 +14,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import servlet.Home;
+
 @WebServlet("/adicionaContato")
   public class AdicionaContatoServlet extends HttpServlet {
-      protected void service(HttpServletRequest request,
+
+	protected void service(HttpServletRequest request,
               HttpServletResponse response)
               throws IOException, ServletException {
 
@@ -48,9 +51,10 @@ import jakarta.servlet.http.HttpServletResponse;
           contato.setDataNascimento(dataNascimento);
 
           // salva o contato
-          HashMap<String, Contato> ContatosDB = new HashMap<String, Contato>();
-          ContatosDB.put(nome, contato);
+          
+          Agenda agenda = Agenda.getAgenda();
 
+          agenda.addContato(nome, contato);
 
           // imprime o nome do contato que foi adicionado
           out.println("<html>");
